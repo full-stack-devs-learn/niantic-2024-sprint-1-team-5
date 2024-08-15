@@ -23,12 +23,12 @@ public class Transaction
     {
         this.transaction_id = transaction_id;
         this.owner_id = owner_id;
-        this.budget_id = budget_id;
+        this.budget_id = budget_id; //NULL
         this.vendor_id = vendor_id;
         this.subcategory_id = subcategory_id;
         this.amount = amount;
         this.date = date;
-        this.note = note;
+        this.note = note; //NULL
     }
 
     public int getTransaction_id() {

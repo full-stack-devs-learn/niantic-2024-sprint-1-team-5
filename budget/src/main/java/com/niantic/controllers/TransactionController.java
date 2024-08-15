@@ -24,5 +24,17 @@ public class TransactionController {
 
         return "transactions/index";
     }
+    @GetMapping("/transactions/add")
+    public String addTransactions()
+    {
+        return "/transactions/add_transaction";
+    }
+    @PostMapping("/transactions/add")
+    public String addTransactions(Model model, @ModelAttribute("transaction") Transaction transaction)
+    {
+        transactionDao.addTransaction(transaction);
+        model.addAttribute("transaction", transaction);
+        return "redirect:/transactions";
+    }
 
 }
