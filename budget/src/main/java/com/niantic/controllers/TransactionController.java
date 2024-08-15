@@ -1,5 +1,7 @@
 package com.niantic.controllers;
 
+import com.niantic.models.Category;
+import com.niantic.services.CategoriesDao;
 import com.niantic.services.TransactionDao;
 import com.niantic.models.Transaction;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,10 @@ public class TransactionController {
         return "transactions/index";
     }
     @GetMapping("/transactions/add")
-    public String addTransactions()
+    public String addTransactions(Model model)
     {
+        ArrayList<Category> categories = new CategoriesDao().getCategories();
+        model.addAttribute("categories", categories);
         return "/transactions/add_transaction";
     }
     @PostMapping("/transactions/add")

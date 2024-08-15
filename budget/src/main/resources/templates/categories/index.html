@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:replace="~{fragments/head.html :: head}"></div>
+<body>
+
+<div th:replace="~{fragments/nav.html :: nav}"></div>
+
+<main class="container mt-4">
+    <h4>Categories</h4>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Category Name</th>
+            <th>Category Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category:${categories}">
+            <td th:text="${category.categoryId}"></td>
+            <td th:text="${category.categoryName}"></td>
+            <td th:text="${category.categoryOwner}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

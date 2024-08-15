@@ -71,5 +71,31 @@ public class CategoriesDao {
 
         return category;
     }
+    public void addCategory(Category category)
+    {
+        String sql = """
+                INSERT INTO categories
+                (category_name, category_owner)
+                VALUES (?, ?)
+                """;
+        jdbcTemplate.update(sql, category.getCategoryName(), category.getCategoryOwner());
+    }
+    public void editCategory(Category category)
+    {
+        String sql = """
+                UPDATE categories
+                SET (category_name = ?)
+                WHERE category_id = ?
+                """;
+        jdbcTemplate.update(sql, category.getCategoryName(), category.getCategoryId());
+    }
+    public void deleteCategory(Category category)
+    {
+        String sql = """
+                DELETE categories
+                WHERE category_id = ?
+                """;
+        jdbcTemplate.update(sql, category.getCategoryId());
+    }
 
 }
