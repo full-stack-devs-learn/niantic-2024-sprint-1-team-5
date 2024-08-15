@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <title>Title</title>
-</head>
+
+<div th:replace="~{fragments/head.html :: head}"></div>
+
 <body>
-    <main>
-        <form method="post">
-            <label>User Name:</label>
-            <input>
-            <label>Date:</label>
-            <input>
-            <label>Amount:</label>
-            <input>
-            <label>Vendor</label>
-            <input>
-            <label>Note:</label>
-            <input>
-            <select name="categories">
-                <option value="Food">Food</option>
-                <option value="Housing">Housing</option>
-                <option value="Entertainment">Entertainment</option>
-            </select>
-        </form>
+
+<div th:replace="~{fragments/nav.html :: nav}"></div>
+
+    <main class="container mt-4">
+        <h4 class="mb-3">Add Transaction</h4>
+            <form method="post">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="userInput">
+                    <label for="userInput">User Name:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="dateInput">
+                    <label for="dateInput">Date:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="amountInput">
+                    <label for="amountInput">Amount:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="vendorInput">
+                    <label for="vendorInput">Vendor</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="noteInput">
+                <label for="noteInput">Note:</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="categoriesSelect" name="categories">
+                        <option value="Food">Food</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Entertainment">Entertainment</option>
+                    </select>
+                    <label for="categoriesSelect">Categories</label>
+                </div>
+                <input class="btn btn-info" type="submit" value="Submit">
+            </form>
     </main>
 </body>
 </html>
