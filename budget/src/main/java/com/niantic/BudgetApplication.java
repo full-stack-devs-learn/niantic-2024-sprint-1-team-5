@@ -12,11 +12,9 @@ public class BudgetApplication {
 
 		TransactionDao transactionDao = new TransactionDao();
 
-		var transactions = transactionDao.getTransactionByUser(1);
+		var transactions = transactionDao.getTransactionById(3);
 
-		for(var transaction : transactions){
-			System.out.println(transaction);
-		}
+		System.out.println(transactions);
 
 
 

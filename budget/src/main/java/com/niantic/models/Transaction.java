@@ -95,8 +95,17 @@ public class Transaction
         this.note = note;
     }
 
-    public String toString()
-    {
-        return String.format("$%-10.2f| %5s", amount, note);
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transaction_id=" + transaction_id +
+                ", owner_id=" + owner_id +
+                ", budget_id=" + budget_id +
+                ", vendor_id=" + vendor_id +
+                ", subcategory_id=" + subcategory_id +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", note='" + note + '\'' +
+                '}';
     }
 }
