@@ -94,4 +94,9 @@ public class Transaction
     public void setNote(String note) {
         this.note = note;
     }
+
+    public String toString()
+    {
+        return String.format("$%-10.2f| %5s", amount, note);
+    }
 }
