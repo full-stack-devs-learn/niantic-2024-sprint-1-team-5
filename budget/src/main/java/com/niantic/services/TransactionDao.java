@@ -5,6 +5,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -23,6 +24,42 @@ public class TransactionDao {
         }};
 
         jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
+    public ArrayList<Transaction> getTransactions()
+    {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        String sql = """
+                SELECT transaction_id
+                    , owner
+                    , budget_id
+                    , vendor_id
+                    , subcategory_id
+                    , amount
+                    , date
+                    , note
+                FROM transactions
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql);
+
+        while(row.next()){
+            int transaction_id = row.getInt("transaction_id");
+            int owner_id = row.getInt("owner");
+            int budget_id = row.getInt("budget_id");
+            int vendor_id = row.getInt("vendor_id");
+            int subcategory_id = row.getInt("subcategory_id");
+            double amount = row.getDouble("amount");
+            LocalDate date = row.getDate("date").toLocalDate();
+            String note = row.getString("note");
+
+            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id,
+                    amount, date, note);
+
+            transactions.add(transaction);
+        }
+        return transactions;
     }
 
     public ArrayList<Transaction> getTransactionsByUser(int owner_id){
@@ -180,4 +217,54 @@ public class TransactionDao {
         }
         return null;
     }
+
+    public void addTransaction(Transaction transaction)
+    {
+        String sql = """
+                INSERT INTO transactions
+                (owner, budget_id, vendor_id, subcategory_id, amount, date, note)
+                VALUES (?, ?, ?, ?, ?, ? , ?);
+                """;
+
+        jdbcTemplate.update(sql,
+                    transaction.getOwner_id(),
+                    transaction.getBudget_id(),
+                    transaction.getVendor_id(),
+                    transaction.getSubcategory_id(),
+                    transaction.getAmount(),
+                    transaction.getDate(),
+                    transaction.getNote());
+    }
+
+    public void updateTransaction(Transaction transaction)
+    {
+        String sql = """
+                UPDATE transactions
+                SET owner = ?
+                    , budget_id = ?
+                    , vendor_id = ?
+                    , subcategory_id = ?
+                    , amount = ?
+                    , date = ?
+                    , note = ?
+                WHERE transaction_id = ?;
+                """;
+
+        jdbcTemplate.update(sql,
+                    transaction.getOwner_id(),
+                    transaction.getBudget_id(),
+                    transaction.getVendor_id(),
+                    transaction.getSubcategory_id(),
+                    transaction.getAmount(),
+                    transaction.getDate(),
+                    transaction.getNote());
+    }
+
+    public void deleteTransaction(int transaction)
+    {
+        String sql = "DELETE FROM transactions WHERE transaction_id = ?";
+
+        jdbcTemplate.update(sql, transaction);
+    }
+
 }
