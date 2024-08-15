@@ -9,16 +9,6 @@ import com.niantic.services.TransactionDao;
 public class BudgetApplication {
 
 	public static void main(String[] args) {
-
-		TransactionDao transactionDao = new TransactionDao();
-
-		var transactions = transactionDao.getTransactionById(3);
-
-		System.out.println(transactions);
-
-
-
-
 		SpringApplication.run(BudgetApplication.class, args);
 	}
 
