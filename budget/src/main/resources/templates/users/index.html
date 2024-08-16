@@ -6,19 +6,21 @@
 <div th:replace="~{fragments/nav.html :: nav}"></div>
 
 <main class="container mt-4">
-    <h4>Categories</h4>
+    <h4>Users</h4>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Category Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="category:${categories}">
-            <td th:text="${category.categoryId}"></td>
-            <td th:text="${category.categoryName}"></td>
+        <tr th:each="user:${users}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
         </tr>
         </tbody>
     </table>

@@ -1,7 +1,10 @@
 package com.niantic.controllers;
 
 import com.niantic.models.Category;
+import com.niantic.models.Subcategory;
+import com.niantic.models.User;
 import com.niantic.services.CategoriesDao;
+import com.niantic.services.SubcategoryDao;
 import com.niantic.services.TransactionDao;
 import com.niantic.models.Transaction;
 import com.niantic.services.UserDao;
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 public class ReportsController {
     TransactionDao transactionDao = new TransactionDao();
     UserDao userDao = new UserDao();
+    CategoriesDao categoriesDao = new CategoriesDao();
+    SubcategoryDao subcategoryDao = new SubcategoryDao();
 
     @GetMapping("/reports")
         public String getAllReports(Model model)
@@ -28,14 +33,17 @@ public class ReportsController {
             return "/reports/index";
         }
 
-    @GetMapping("/reports/category")
+    @GetMapping("/reports/subcategories")
     public String getAllReportsByCategory(Model model)
     {
-        ArrayList<Transaction> transactions = transactionDao.getTransactionsByCategory(1,1);
+        ArrayList<Transaction> transactions = transactionDao.getTransactionsOrderByCategory();
+        ArrayList<Subcategory> subcategories = subcategoryDao.getAllSubcategories();
+
 
         model.addAttribute("transactions", transactions);
+        model.addAttribute("subcategories", subcategories);
 
-        return "/reports/category";
+        return "/reports/subcategories";
     }
 
     @GetMapping("/reports/year")
@@ -76,9 +84,11 @@ public class ReportsController {
     @GetMapping("/reports/user")
     public String getAllReportsByUser(Model model)
     {
-        ArrayList<Transaction> transactions = transactionDao.getTransactionsByUser(1);
+        ArrayList<Transaction> transactions = transactionDao.getTransactions();
+        ArrayList<User> users = userDao.getAllUsers();
 
         model.addAttribute("transactions", transactions);
+        model.addAttribute("users", users);
 
         return "/reports/user";
     }

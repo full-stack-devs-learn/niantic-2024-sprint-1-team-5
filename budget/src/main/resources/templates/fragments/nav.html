@@ -9,20 +9,28 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Reports</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Reports
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/reports/subcategories}">By Subcategory</a></li>
+                        <li><a class="dropdown-item" th:href="@{/reports/year}">By Year</a></li>
+                        <li><a class="dropdown-item" th:href="@{/reports/month}">By Month</a></li>
+                        <li><a class="dropdown-item" th:href="@{/reports/user}">By User</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/transactions}">Transactions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Users</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/users}">Users</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/categories}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Vendors</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/vendors}">Vendors</a>
                 </li>
             </ul>
         </div>

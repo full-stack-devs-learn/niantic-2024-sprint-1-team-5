@@ -6,9 +6,9 @@
 <div th:replace="~{fragments/nav.html :: nav}"></div>
 
 <main class="container mt-4">
-    <h4>Filtered By: User</h4>
-    <table class="table table-striped" th:each="user:${users}">
-        <h4 th:text="${user.getFullName}" class="mt-4 mb-2"></h4>
+    <h4>Filtered By: Subcategory</h4>
+    <table class="table table-striped" th:each="subcategory:${subcategories}">
+        <h4 th:text="${subcategory.getCategoryName}" class="mt-4 mb-2"></h4>
         <thead>
         <tr>
             <th>Amount</th>
@@ -17,8 +17,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${transaction.getOwnerId()} == ${user.getUserId}" th:each="transaction:${transactions}">
-            <td th:text= "|$${transaction.amount}|"></td>
+        <tr th:if="${transaction.subcategoryId} == ${subcategory.subcategoryId}" th:each="transaction:${transactions}">
+            <td th:text="|$${transaction.amount}|"></td>
             <td th:text="${transaction.date}"></td>
             <td th:text="${transaction.note}"></td>
         </tr>

@@ -248,6 +248,40 @@ public class TransactionDao {
 
         return transactions;
     }
+
+    public ArrayList<Transaction> getTransactionsOrderByCategory()
+    {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        String sql = """
+                SELECT c.category_name
+                , s.subcategory_name
+                , t.*
+                FROM transactions t
+                JOIN subcategories s ON t.subcategory_id = s.subcategory_id
+                JOIN categories c ON s.parent_id = c.category_id
+                ORDER BY c.category_name
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql);
+
+        while(row.next()){
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
+            double amount = row.getDouble("amount");
+            LocalDate date = row.getDate("date").toLocalDate();
+            String note = row.getString("note");
+
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
+
+            transactions.add(transaction);
+        }
+
+        return transactions;
+    }
     public Transaction getTransactionById(int transactionId)
     {
         String sql = """
