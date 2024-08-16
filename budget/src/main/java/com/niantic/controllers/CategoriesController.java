@@ -37,4 +37,6 @@ public class CategoriesController {
         model.addAttribute("category", category);
         return "redirect:/categories";
     }
+
+
 }

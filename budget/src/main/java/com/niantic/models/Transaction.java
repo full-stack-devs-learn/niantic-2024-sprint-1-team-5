@@ -1,17 +1,14 @@
 package com.niantic.models;
 
-import jdk.jfr.Category;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Transaction
 {
-    private int transaction_id;
-    private int owner_id;
-    private int budget_id;
-    private int vendor_id;
-    private int subcategory_id;
+    private int transactionId;
+    private int ownerId;
+    private int budgetId;
+    private int vendorId;
+    private int subcategoryId;
     private double amount;
     private LocalDate date;
     private String note;
@@ -21,54 +18,54 @@ public class Transaction
     }
     public Transaction(int transaction_id, int owner_id, int budget_id, int vendor_id, int subcategory_id, double amount, LocalDate date, String note)
     {
-        this.transaction_id = transaction_id;
-        this.owner_id = owner_id;
-        this.budget_id = budget_id; //NULL
-        this.vendor_id = vendor_id;
-        this.subcategory_id = subcategory_id;
+        this.transactionId = transaction_id;
+        this.ownerId = owner_id;
+        this.budgetId = budget_id; //NULL
+        this.vendorId = vendor_id;
+        this.subcategoryId = subcategory_id;
         this.amount = amount;
         this.date = date;
         this.note = note; //NULL
     }
 
-    public int getTransaction_id() {
-        return transaction_id;
+    public int getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransaction_id(int transaction_id) {
-        this.transaction_id = transaction_id;
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public int getOwner_id() {
-        return owner_id;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public int getBudget_id() {
-        return budget_id;
+    public int getBudgetId() {
+        return budgetId;
     }
 
-    public void setBudget_id(int budget_id) {
-        this.budget_id = budget_id;
+    public void setBudgetId(int budgetId) {
+        this.budgetId = budgetId;
     }
 
-    public int getVendor_id() {
-        return vendor_id;
+    public int getVendorId() {
+        return vendorId;
     }
 
-    public void setVendor_id(int vendor_id) {
-        this.vendor_id = vendor_id;
+    public void setVendorId(int vendorId) {
+        this.vendorId = vendorId;
     }
 
-    public int getSubcategory_id() {
-        return subcategory_id;
+    public int getSubcategoryId() {
+        return subcategoryId;
     }
 
-    public void setSubcategory_id(int subcategory_id) {
-        this.subcategory_id = subcategory_id;
+    public void setSubcategoryId(int subcategoryId) {
+        this.subcategoryId = subcategoryId;
     }
 
     public double getAmount() {
@@ -98,11 +95,11 @@ public class Transaction
     @Override
     public String toString() {
         return "Transaction{" +
-                "transaction_id=" + transaction_id +
-                ", owner_id=" + owner_id +
-                ", budget_id=" + budget_id +
-                ", vendor_id=" + vendor_id +
-                ", subcategory_id=" + subcategory_id +
+                "transactionId=" + transactionId +
+                ", ownerId=" + ownerId +
+                ", budgetId=" + budgetId +
+                ", vendorId=" + vendorId +
+                ", subcategoryId=" + subcategoryId +
                 ", amount=" + amount +
                 ", date=" + date +
                 ", note='" + note + '\'' +

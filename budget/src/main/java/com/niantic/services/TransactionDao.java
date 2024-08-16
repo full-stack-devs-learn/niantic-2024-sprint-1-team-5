@@ -1,11 +1,9 @@
 package com.niantic.services;
 import com.niantic.models.Transaction;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -45,16 +43,16 @@ public class TransactionDao {
         var row = jdbcTemplate.queryForRowSet(sql);
 
         while(row.next()){
-            int transaction_id = row.getInt("transaction_id");
-            int owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id,
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId,
                     amount, date, note);
 
             transactions.add(transaction);
@@ -81,16 +79,16 @@ public class TransactionDao {
         var row = jdbcTemplate.queryForRowSet(sql, owner_id);
 
         while(row.next()){
-            int transaction_id = row.getInt("transaction_id");
-            owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id,
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId,
                     amount, date, note);
 
             transactions.add(transaction);
@@ -112,16 +110,16 @@ public class TransactionDao {
 
         while(row.next())
         {
-            int transaction_id = row.getInt("transaction_id");
-            owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id, amount, date, note);
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
 
             transactions.add(transaction);
         }
@@ -142,23 +140,23 @@ public class TransactionDao {
 
         while(row.next())
         {
-            int transaction_id = row.getInt("transaction_id");
-            owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id, amount, date, note);
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
 
             transactions.add(transaction);
         }
 
         return transactions;
     }
-    public ArrayList<Transaction> getTransactionsByCategory(int ownerId, int categoryId)
+    public ArrayList<Transaction> getTransactionsByCategory(int owner_id, int categoryId)
     {
         ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -173,19 +171,19 @@ public class TransactionDao {
                 ORDER BY t.date desc
                 """;
 
-        var row = jdbcTemplate.queryForRowSet(sql, ownerId, categoryId);
+        var row = jdbcTemplate.queryForRowSet(sql, owner_id, categoryId);
 
         while(row.next()){
-            int transaction_id = row.getInt("transaction_id");
-            int owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            int transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id, amount, date, note);
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
 
             transactions.add(transaction);
         }
@@ -197,21 +195,21 @@ public class TransactionDao {
         String sql = """
                 SELECT *
                 FROM transactions
-                WHERE transaction_id = ?
+                WHERE transactionId = ?
                 """;
         var row = jdbcTemplate.queryForRowSet(sql, transactionId);
 
         if(row.next()){
-            int transaction_id = row.getInt("transaction_id");
-            int owner_id = row.getInt("owner");
-            int budget_id = row.getInt("budget_id");
-            int vendor_id = row.getInt("vendor_id");
-            int subcategory_id = row.getInt("subcategory_id");
+            transactionId = row.getInt("transaction_id");
+            int ownerId = row.getInt("owner");
+            int budgetId = row.getInt("budget_id");
+            int vendorId = row.getInt("vendor_id");
+            int subcategoryId = row.getInt("subcategory_id");
             double amount = row.getDouble("amount");
             LocalDate date = row.getDate("date").toLocalDate();
             String note = row.getString("note");
 
-            Transaction transaction = new Transaction(transaction_id, owner_id, budget_id, vendor_id, subcategory_id, amount, date, note);
+            Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
 
             return transaction;
         }
@@ -222,15 +220,14 @@ public class TransactionDao {
     {
         String sql = """
                 INSERT INTO transactions
-                (owner, budget_id, vendor_id, subcategory_id, amount, date, note)
-                VALUES (?, ?, ?, ?, ?, ? , ?);
+                (owner, vendor_id, subcategory_id, amount, date, note)
+                VALUES (?, ?, ?, ?, ?, ?);
                 """;
 
         jdbcTemplate.update(sql,
-                    transaction.getOwner_id(),
-                    transaction.getBudget_id(),
-                    transaction.getVendor_id(),
-                    transaction.getSubcategory_id(),
+                    transaction.getOwnerId(),
+                    transaction.getVendorId(),
+                    transaction.getSubcategoryId(),
                     transaction.getAmount(),
                     transaction.getDate(),
                     transaction.getNote());
@@ -251,10 +248,10 @@ public class TransactionDao {
                 """;
 
         jdbcTemplate.update(sql,
-                    transaction.getOwner_id(),
-                    transaction.getBudget_id(),
-                    transaction.getVendor_id(),
-                    transaction.getSubcategory_id(),
+                    transaction.getOwnerId(),
+                    transaction.getBudgetId(),
+                    transaction.getVendorId(),
+                    transaction.getSubcategoryId(),
                     transaction.getAmount(),
                     transaction.getDate(),
                     transaction.getNote());

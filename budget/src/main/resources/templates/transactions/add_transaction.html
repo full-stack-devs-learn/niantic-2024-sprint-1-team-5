@@ -9,36 +9,39 @@
 
     <main class="container mt-4">
         <h4 class="mb-3">Add Transaction</h4>
-            <form method="post">
+            <form method="post" th:object="${transaction}">
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="userSelect" name="users">
-                        <option th:each="user: ${users}" th:text="${user.full_name}">
+                    <select class="form-select" id="userSelect" name="users" th:field="*{ownerId}">
+                        <option th:each="user: ${users}" th:text="${user.fullName}" th:value="${user.userId}">
                         </option>
                     </select>
-                    <label for="categoriesSelect">Categories</label>
+                    <label for="userSelect">User:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="dateInput">
+                    <input class="form-control" id="dateInput" th:field="*{date}">
                     <label for="dateInput">Date: (YYYY-MM-DD)</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="amountInput">
+                    <input class="form-control" id="amountInput" th:field="*{amount}">
                     <label for="amountInput">Amount:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="vendorInput">
-                    <label for="vendorInput">Vendor</label>
+                    <select class="form-select" id="vendorsSelect" name="vendors" th:field="*{vendorId}">
+                        <option th:each="vendor: ${vendors}" th:text="${vendor.vendorName}" th:value="${vendor.vendorId}">
+                        </option>
+                    </select>
+                    <label for="vendorsSelect">Vendors:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="noteInput">
+                    <input class="form-control" id="noteInput" th:field="*{note}">
                 <label for="noteInput">Note:</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="categoriesSelect" name="categories">
-                        <option th:each="category: ${categories}" th:text="${category.categoryName}">
+                    <select class="form-select" id="subcategoriesSelect" name="subcategories" th:field="*{subcategoryId}">
+                        <option th:each="subcategory: ${subcategories}" th:text="${subcategory.categoryName}" th:value="${subcategory.subcategoryId}">
                         </option>
                     </select>
-                    <label for="categoriesSelect">Categories</label>
+                    <label for="subcategoriesSelect">Subcategories:</label>
                 </div>
                 <input class="btn btn-info" type="submit" value="Submit">
             </form>

@@ -1,49 +1,50 @@
 package com.niantic.models;
 
 public class User {
-    int user_id;
-    String first_name;
-    String last_name;
-    String full_name;
+    int userId;
+    String firstName;
+    String lastName;
+    String fullName;
 
-    public User(){}
-    public User (int user_id , String first_name, String last_name, String full_name)
-    {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.full_name = full_name;
+    public User() {
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User(int user_id, String first_name, String last_name, String full_name) {
+        this.userId = user_id;
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.fullName = full_name;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

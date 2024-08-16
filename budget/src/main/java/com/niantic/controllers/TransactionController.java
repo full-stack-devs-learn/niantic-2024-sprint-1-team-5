@@ -1,11 +1,7 @@
 package com.niantic.controllers;
 
-import com.niantic.models.Category;
-import com.niantic.models.User;
-import com.niantic.services.CategoriesDao;
-import com.niantic.services.TransactionDao;
-import com.niantic.models.Transaction;
-import com.niantic.services.UserDao;
+import com.niantic.models.*;
+import com.niantic.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -33,8 +29,14 @@ public class TransactionController {
     {
         ArrayList<Category> categories = new CategoriesDao().getCategories();
         ArrayList<User> users = new UserDao().getAllUsers();
+        ArrayList<Vendor> vendors = new VendorDao().getAllVendors();
+        ArrayList<Subcategory> subcategories = new SubcategoryDao().getAllSubcategories();
+        Transaction transaction = new Transaction();
         model.addAttribute("categories", categories);
         model.addAttribute("users", users);
+        model.addAttribute("vendors", vendors);
+        model.addAttribute("subcategories", subcategories);
+        model.addAttribute("transaction", transaction);
         return "/transactions/add_transaction";
     }
     @PostMapping("/transactions/add")
