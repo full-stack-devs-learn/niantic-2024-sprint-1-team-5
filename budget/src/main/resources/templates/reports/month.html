@@ -7,17 +7,18 @@
 
 <main class="container mt-4">
     <h4>Filtered By: Month</h4>
-    <table class="table table-striped">
+    <table class="table table-striped" th:each="month:${uniqueMonths}">
+        <h4 th:text="${month}" class="mt-4 mb-2"></h4>
         <thead>
         <tr>
-            <th>Date</th>
             <th>Amount</th>
+            <th>Date</th>
             <th>Note</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="transaction:${transactions}">
-            <td th:text="${transaction.amount}"></td>
+        <tr th:if="${transaction.date.getMonthValue()} == ${month}"  th:each="transaction:${transactions}">
+            <td th:text= "|$${transaction.amount}|"></td>
             <td th:text="${transaction.date}"></td>
             <td th:text="${transaction.note}"></td>
         </tr>

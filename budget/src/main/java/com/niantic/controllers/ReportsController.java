@@ -60,7 +60,14 @@ public class ReportsController {
     public String getAllReportsByMonth(Model model)
     {
         ArrayList<Transaction> transactions = transactionDao.getTransactionsOrderByMonth();
+        ArrayList<Integer> uniqueMonth = new ArrayList<>();
 
+        for(var transaction : transactions){
+            if(!uniqueMonth.contains(transaction.getDate().getMonthValue())){
+                uniqueMonth.add(transaction.getDate().getMonthValue());
+            }
+        }
+        model.addAttribute("uniqueMonths", uniqueMonth);
         model.addAttribute("transactions", transactions);
 
         return "/reports/month";
