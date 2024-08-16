@@ -59,7 +59,6 @@ public class TransactionDao {
         }
         return transactions;
     }
-
     public ArrayList<Transaction> getTransactionsByUser(int owner_id){
         ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -95,7 +94,6 @@ public class TransactionDao {
         }
         return transactions;
     }
-
     public ArrayList<Transaction> getTransactionsByMonth(int owner_id, int month_number)
     {   ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -126,17 +124,47 @@ public class TransactionDao {
 
        return transactions;
     }
-    public ArrayList<Transaction> getTransactionsByYear(int owner_id, int year)
+    public ArrayList<Transaction> getTransactionsOrderByMonth() {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        String sql = """
+                SELECT *
+                FROM transactions
+                ORDER BY MONTH(date)
+                DESC
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql);
+
+        while (row.next()) {
+            {
+                int transactionId = row.getInt("transaction_id");
+                int ownerId = row.getInt("owner");
+                int budgetId = row.getInt("budget_id");
+                int vendorId = row.getInt("vendor_id");
+                int subcategoryId = row.getInt("subcategory_id");
+                double amount = row.getDouble("amount");
+                LocalDate date = row.getDate("date").toLocalDate();
+                String note = row.getString("note");
+
+                Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
+
+                transactions.add(transaction);
+            }
+        }
+        return transactions;
+    }
+    public ArrayList<Transaction> getTransactionsByYear(int year)
     {   ArrayList<Transaction> transactions = new ArrayList<>();
 
         String sql = """
                 SELECT *
                 FROM transactions
-                WHERE owner = ?
-                AND YEAR(date) = ?
+                WHERE
+                YEAR(date) = ?
                 """;
 
-        var row = jdbcTemplate.queryForRowSet(sql, owner_id, year);
+        var row = jdbcTemplate.queryForRowSet(sql,year);
 
         while(row.next())
         {
@@ -154,6 +182,36 @@ public class TransactionDao {
             transactions.add(transaction);
         }
 
+        return transactions;
+    }
+    public ArrayList<Transaction> getTransactionsOrderByYear() {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        String sql = """
+                SELECT *
+                FROM transactions
+                ORDER BY YEAR(date)
+                DESC
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql);
+
+        while (row.next()) {
+            {
+                int transactionId = row.getInt("transaction_id");
+                int ownerId = row.getInt("owner");
+                int budgetId = row.getInt("budget_id");
+                int vendorId = row.getInt("vendor_id");
+                int subcategoryId = row.getInt("subcategory_id");
+                double amount = row.getDouble("amount");
+                LocalDate date = row.getDate("date").toLocalDate();
+                String note = row.getString("note");
+
+                Transaction transaction = new Transaction(transactionId, ownerId, budgetId, vendorId, subcategoryId, amount, date, note);
+
+                transactions.add(transaction);
+            }
+        }
         return transactions;
     }
     public ArrayList<Transaction> getTransactionsByCategory(int owner_id, int categoryId)

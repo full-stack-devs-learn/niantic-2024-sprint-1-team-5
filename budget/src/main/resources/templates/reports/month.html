@@ -6,18 +6,17 @@
 <div th:replace="~{fragments/nav.html :: nav}"></div>
 
 <main class="container mt-4">
-    <h4>Filtered By: Year</h4>
-    <table class="table table-striped" th:each="year:${uniqueYears}">
-        <h4 th:text="${year}"></h4>
+    <h4>Filtered By: Month</h4>
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>Amount</th>
             <th>Date</th>
+            <th>Amount</th>
             <th>Note</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${transaction.date.getYear()} == ${year}"  th:each="transaction:${transactions}">
+        <tr th:each="transaction:${transactions}">
             <td th:text="${transaction.amount}"></td>
             <td th:text="${transaction.date}"></td>
             <td th:text="${transaction.note}"></td>
