@@ -11,12 +11,15 @@
         <h4 class="mb-3">Add Transaction</h4>
             <form method="post">
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="userInput">
-                    <label for="userInput">User Name:</label>
+                    <select class="form-select" id="userSelect" name="users">
+                        <option th:each="user: ${users}" th:text="${user.full_name}">
+                        </option>
+                    </select>
+                    <label for="categoriesSelect">Categories</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input class="form-control" id="dateInput">
-                    <label for="dateInput">Date:</label>
+                    <label for="dateInput">Date: (YYYY-MM-DD)</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input class="form-control" id="amountInput">
