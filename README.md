@@ -15,7 +15,7 @@
 
 ## Introduction
 
-This project was developed as part of a collaborative effort between [Jordan] and [Roxy] over a two-day pair programming session. The primary objective was to enhance our teamwork skills through hands-on experience with planning, communication, and coding in tandem. 
+This project was developed as part of a collaborative effort between [Roxy](https://github.com/roxyabedi) and [Jordan](https://github.com/jordannapoleon) over a two-day pair programming session. The primary objective was to enhance our teamwork skills through hands-on experience with planning, communication, and coding in tandem. 
 
 **Key Aspects of the Project:**
 
