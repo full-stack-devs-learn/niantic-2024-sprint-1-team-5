@@ -45,7 +45,7 @@ The project includes the following key features and functionalities:
 
 - **Report Generation:** Users can generate reports based on different criteria, including categories, monthly summaries, yearly overviews, or user-specific reports. This functionality helps in analyzing and visualizing transaction data.
 
-- **Category and User Pages:** The application includes pages that display and manage categories and users. This feature provides a clear view of available categories and user information.
+- **Category, Vendor, and User Pages:** The application includes pages that display and manage categories, vendors, and users. This feature provides a clear view of available categories, vendors, and user information.
 
 ---
 
